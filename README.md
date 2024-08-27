@@ -1,4 +1,6 @@
-# AutoMate
+<div align="center" style="font-size: 22pt;"> 
+<h1 style="text-align: center;">AutoMate</h1>
+</div>
 Dataset and code for the automatic mating of CAD assemblies.
 
 ## Paper
