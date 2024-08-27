@@ -28,7 +28,7 @@ dependencies:
   - ipykernel
   - pip
   - eigen
-  - occt>=7.6
+  - occt=7.6
   - cmake
   - pybind11
   - pip:
