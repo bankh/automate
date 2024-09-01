@@ -216,7 +216,7 @@ documentId, documentMicroversion, and elementId are unchanged from their onshape
 
 __Sample files:__  
 json file: [00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3b1b46a08db95a944f3ba0f4.json](data/data_AutoMate/complete_top_level_assys_json/00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3b1b46a08db95a944f3ba0f4.json)  
-x_t (parasolid text) file: [00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3ce90d8498cfab11d1e6008e_default_jjeei.x_t](data/data_AutoMate/complete_top_level_assys_parasolid/00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3ce90d8498cfab11d1e6008e_default_jjeei.x_t)  
+x_t file: [00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3ce90d8498cfab11d1e6008e_default_jjeei.x_t](data/data_AutoMate/complete_top_level_assys_parasolid/00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3ce90d8498cfab11d1e6008e_default_jjeei.x_t)  
 step file: [00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3ce90d8498cfab11d1e6008e_default_jjeei.step](data/data_AutoMate/complete_top_level_assys_step/00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3ce90d8498cfab11d1e6008e_default_jjeei.step)  
 
 Here, we provide tools to prepare the required data for training and testing of the model. The sample above is organized by using these scripts:
