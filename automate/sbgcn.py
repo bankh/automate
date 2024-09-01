@@ -58,13 +58,11 @@ class SBGCN(torch.nn.Module):
         self.L2E = BipartiteResMRConv(out_width)
         self.E2V = BipartiteResMRConv(out_width)
 
-    
     def forward(self, data):
         x_f = data.faces
         x_l = data.loops
         x_e = data.edges
         x_v = data.vertices
-
 
         # Compute uvnet features
         if self.use_uvnet_features:
@@ -73,13 +71,11 @@ class SBGCN(torch.nn.Module):
             x_f = torch.cat((x_f, hidden_srf_feat), dim=1)
             x_e = torch.cat((x_e, hidden_crv_feat), dim=1)
 
-
         # Apply Input Encoders
         x_f = self.embed_f_in(x_f)
         x_l = self.embed_l_in(x_l)
         x_e = self.embed_e_in(x_e)
         x_v = self.embed_v_in(x_v)
-
 
         # Upward Pass ([[1,0]] flips downwards graph edges)
         x_e = self.V2E(x_v, x_e, data.edge_to_vertex[[1,0]])
@@ -124,7 +120,6 @@ class BipartiteResMRConv(torch.nn.Module):
             dim_size=x_dst.shape[0]
         )
         return x_dst + self.mlp(torch.cat([x_dst, maxes], dim=1))
-
 
 class LinearBlock(torch.nn.Module):
     def __init__(self, *layer_sizes, batch_norm=False, dropout=0.0, last_linear=False, leaky=True):

@@ -185,8 +185,6 @@ class FaceFeatures:
 
         return s
 
-
-
 def featurize_face(f, options):
     if not isinstance(f, dict):
         f = DotMap(torchify(f))
@@ -219,7 +217,6 @@ def featurize_face(f, options):
     
     return torch.cat(feature_parts).flatten().float()
 
-
 class LoopFeatures:
     r"""
     Options for which features to load for each BREP Loop
@@ -246,7 +243,6 @@ class LoopFeatures:
         
         return s
 
-
 def featurize_loop(l, options):
     if not isinstance(l, dict):
         l = DotMap(torchify(l))
@@ -267,7 +263,6 @@ def featurize_loop(l, options):
         feature_parts.append(to_flat(l.moment_of_inertia))
     
     return torch.cat(feature_parts).flatten().float()
-
 
 EDGE_PARAM_SIZE = 11
 
@@ -328,7 +323,6 @@ class EdgeFeatures:
             s += 9
         return s
         
-
 def featurize_edge(e, options):
     if not isinstance(e, dict):
         e = DotMap(torchify(e))
@@ -370,7 +364,6 @@ def featurize_edge(e, options):
     
     return torch.cat(feature_parts).flatten().float()
 
-
 class VertexFeatures:
     r"""
     Options for which features to load for each BREP Vertex
@@ -388,7 +381,6 @@ def featurize_vert(v, options):
     if options.vertex.position:
         feature_parts.append(to_flat(v.position))
     return torch.cat(feature_parts).flatten().float()
-
 
 def flatbatch(datalist):
     follow_batch = []
@@ -409,7 +401,6 @@ def flatbatch(datalist):
     data.__node_sets__ = datalist[0].__node_sets__
     data.__edge_sets__['flat_topos_to_graph_idx'] = ['graph_idx']
     return data
-
 
 def part_to_graph(part, options):
     # Add dot (.) access to deserialized parts so they act more like C++ module Parts
@@ -647,7 +638,6 @@ def part_to_graph(part, options):
         data.__edge_sets__['mcf_refs'] = ['flat_topos','flat_topos',0]
 
     return data
-
 
 class HetData(tg.data.Data):
     r"""

@@ -8,6 +8,7 @@ from .sbgcn import SBGCN, LinearBlock, BipartiteResMRConv
 
 from .util import run_model, ArgparseInitialized
 from .eclasses import find_eclasses
+from .pointnet_encoder import PointNetEncoder
 
 from automate_cpp import Part, PartOptions
 
@@ -27,5 +28,6 @@ __all__ = [
     'BipartiteResMRConv',
     'Part',
     'PartOptions',
-    'find_eclasses'
+    'find_eclasses',
+    'PointNetEncoder'
     ]
