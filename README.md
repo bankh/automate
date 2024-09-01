@@ -214,8 +214,6 @@ All unique identifies are derived from their unique identifiers within Onshape. 
 documentId, documentMicroversion, and elementId are unchanged from their onshape form except for being lower case only. The encoded configuration is the first 8 characters of the base32 encoded sha256 hash of the full configuration query string from Onshape. Because this is a destructive transform, the .json file `config_encodings.json` is provided to map back to the original, unencoded query strings. Part id is also encoded as a base32 encoding of the original Onshape part_id, but this transform is reversible. The file `file_encodings.py` contains helper functions for converting back-and-forth between Onshape identifiers and the identifiers used in the AutoMate dataset.
 </details>
 
-</br>
-
 __Sample files:__  
 json file: [00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3b1b46a08db95a944f3ba0f4.json](data/data_AutoMate/complete_top_level_assys_json/00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3b1b46a08db95a944f3ba0f4.json)  
 x_t (parasolid text) file: [00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3ce90d8498cfab11d1e6008e_default_jjeei.x_t](data/data_AutoMate/complete_top_level_assys_parasolid/00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3ce90d8498cfab11d1e6008e_default_jjeei.x_t)  
