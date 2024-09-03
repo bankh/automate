@@ -5,10 +5,10 @@
 Accompanying dataset and code to the publication: [AutoMate: A Dataset and Learning Approach for Automatic Mating of CAD Assemblies](https://dl.acm.org/doi/10.1145/3478513.3480562) or arXiv prePrint: [2302.05533](https://arxiv.org/abs/2105.12238).
 
 __Notes/ Changes from the Original Repository:__
-- Great work on BRep structure in terms of the data and proposed model.
-- The author already changed the dependency of Parasolid as optional and one can use an open-source BRep framework (e.g., [OpenCascade](https://github.com/Open-Cascade-SAS/OCCT)).
-- The instructions on data (added [here](#data-preparation)) is not directly on the repository and training (added [here](#training-of-the-model)) is missing. 
-- Some of the dependencies might be problematic in some systems (e.g., AMD-based GPUs) and it might be great to add some notes on the original system's features beyond the provided `.yml` files. Details of the hardware system and the installation of the dependencies are added [here](#requirements)---please expand `Added Installation on AMD-based System` for more details.
+- Great work as part of the _Enabling AI in Computer-Aided Design Through Representations_.
+- The author already changed the dependency of Parasolid as optional, and one can use an open-source BRep framework (e.g., [OpenCascade](https://github.com/Open-Cascade-SAS/OCCT)).
+- The instructions on data (added [here](#details-of-the-dataset)) are not directly on the repository, and training (added [here](#training-of-the-model-wip))) is missing. 
+- Some of the dependencies might be problematic in some systems (e.g., AMD-based GPUs), and it might be great to add some notes on the original system's features beyond the provided `.yml` files. Details of the hardware system and the installation of the dependencies are added [here](#requirements)---please expand `Added Installation on AMD-based System` for more details.
 
 [ ] Multi-GPU training
 
@@ -203,15 +203,15 @@ measured in meters. Masses are derived from assuming a unitless density of 1.
 
 <details>
 <summary><strong>3-Associating with OnShape IDs</strong></summary>
-All unique identifies are derived from their unique identifiers within Onshape. However, since Onshape query strings are case sensitive, contain non-path-friendly characters, and are too long for some file systems, we have canonicalized and shortened them. In general, the association is given by
+All unique identifies are derived from their unique identifiers within Onshape. However, since Onshape query strings are case-sensitive, contain non-path-friendly characters, and are too long for some file systems, we have canonicalized and shortened them. In general, the association is given by
 
  <pre>
  {documentId}_{documentMicroversion}_{elementId}_{encoded_configuration}_{[encoded_part_id if relevant]}
  </pre>
 
- associated files are named with this id plus the relevant file extension (.json, .x_t, or .step).
+ associated files are named with this ID plus the relevant file extension (.json, .x_t, or .step).
 
-documentId, documentMicroversion, and elementId are unchanged from their onshape form except for being lower case only. The encoded configuration is the first 8 characters of the base32 encoded sha256 hash of the full configuration query string from Onshape. Because this is a destructive transform, the .json file `config_encodings.json` is provided to map back to the original, unencoded query strings. Part id is also encoded as a base32 encoding of the original Onshape part_id, but this transform is reversible. The file `file_encodings.py` contains helper functions for converting back-and-forth between Onshape identifiers and the identifiers used in the AutoMate dataset.
+documentId, documentMicroversion, and elementId are unchanged from their OnShape form except for being lowercase only. The encoded configuration is the first eight characters of the base32 encoded sha256 hash of the full configuration query string from Onshape. Because this is a destructive transform, the .json file `config_encodings.json` is provided to map back to the original, unencoded query strings. Part id is also encoded as a base32 encoding of the original Onshape part_id, but this transform is reversible. The file `file_encodings.py` contains helper functions for converting back-and-forth between Onshape identifiers and the identifiers used in the AutoMate dataset.
 </details>
 
 __Sample files:__  
@@ -219,7 +219,7 @@ json file: [00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3b1b46a08db95a944f
 x_t file: [00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3ce90d8498cfab11d1e6008e_default_jjeei.x_t](data/data_AutoMate/complete_top_level_assys_parasolid/00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3ce90d8498cfab11d1e6008e_default_jjeei.x_t)  
 step file: [00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3ce90d8498cfab11d1e6008e_default_jjeei.step](data/data_AutoMate/complete_top_level_assys_step/00a0c68f4057bd42c6570577_c81c4b608085e9dcf0a9ee9a_3ce90d8498cfab11d1e6008e_default_jjeei.step)  
 
-Here, we provide tools to prepare the required data for training and testing of the model. The sample above is organized by using these scripts:
+Here, we provide tools to prepare the required data for training and testing the model under `./notebooks`. The set of samples above is organized by using these scripts:
 - [`grab_step_para_data_prep.ipynb`](./notebooks/grab_step_para_data_prep.ipynb) is used to extract the STEP and Parasolid files for the associated parts in the JSON files and save them in separate folders.
 - [`json_convert_bprep_org.ipynb`](./notebooks/json_convert_bprep_org.ipynb) is used to convert the JSON files to a specific BREP organization that is required for the training and testing of the model.
 
@@ -227,20 +227,20 @@ Here, we provide tools to prepare the required data for training and testing of 
 Automate relies on C++ extension modules to read Parasolid and STEP files. Since Parasolid is a proprietary CAD kernel, we can't distribute it, so you need to have the distribution on your machine already and compile it at install time.
 
 ### Requirements
-Installation relies on CMake, OpenCascade, and Parasolid. In the future, we intend to make the Parasolid dependency optional. The easiest way to get the first two dependencies (and all python dependencies) is to install the conda environments `environment.yml` or `minimal_env.yml`:
+The installation relies on CMake, OpenCascade, and Parasolid. In the future, we intend to make the Parasolid dependency optional. The easiest way to get the first two dependencies (and all Python dependencies) is to install the conda environments `environment.yml` or `minimal_env.yml`:
 
 `conda env create -f [environment|minimal_env].yml`
 
 <details>
 <summary>Parasolid</summary>
 
-The Parasolid requirement relies on setting the environmental variable `$PARASOLID_BASE` on your system pointing to the Parasolid install directory for your operating system. For example
+The Parasolid requirement relies on setting the environmental variable `$PARASOLID_BASE` on your system, pointing to the Parasolid install directory for your operating system. For example
 
 ``export PARASOLID_BASE=${PATH_TO_PARASOLID_INSTALL}/intel_linux/base``
 
 Replace ``intel_linux`` with the directory appropriate to your OS. The base directory should contain files like `pskernel_archive.lib` and `parasolid_kernel.h`.
 
-Once these requirements are met, you an install via pip:
+Once these requirements are met, you can install via pip:
 
 `pip install git+https://github.com/degravity/automate.git@v1.0.4`
 </details>
@@ -336,7 +336,7 @@ __Notes:__
 [4] We can also create Python binaries (e.g., `.whl` files) for each of the torch-geometric and other libraries above. This will avoid the recompilation in the future. We can `python setup.py bdist_wheel`. This command needs to be run in the main folder of the target library (e.g., ./pyg/pytorch_geometric/) where `setup.py` is located. For example, the compiled binary of `torch_geometric` will be in `./pytorch_geometric/dist/`.
 </details>
 
-### Training of the Model (wip)
+### Training of the Model-wip
 One can use `train.py` to train the model. The model is trained using the Mean Squared Error (MSE) loss between the ground truth points and the reconstructed points. Below is an example command to run the training with single GPU.
 ```bash
 $ python train.py --splits_path ./data/data_AutoMate/complete_top_level_assys_json \
