@@ -7,7 +7,7 @@ Accompanying dataset and code to the publication: [AutoMate: A Dataset and Learn
 __Notes/ Changes from the Original Repository:__
 - Great work as part of the _Enabling AI in Computer-Aided Design Through Representations_.
 - The author already changed the dependency of Parasolid as optional, and one can use an open-source BRep framework (e.g., [OpenCascade](https://github.com/Open-Cascade-SAS/OCCT)).
-- The instructions on data (added [here](#details-of-the-dataset)) are not directly on the repository, and training (added [here](#training-of-the-model-wip))) is missing. 
+- The instructions on data (added [here](#details-of-the-dataset)) are not directly on the repository, and training (added [here](#training-of-the-model-wip)) is missing. 
 - Some of the dependencies might be problematic in some systems (e.g., AMD-based GPUs), and it might be great to add some notes on the original system's features beyond the provided `.yml` files. Details of the hardware system and the installation of the dependencies are added [here](#requirements)---please expand `Added Installation on AMD-based System` for more details.
 
 [ ] Multi-GPU training
